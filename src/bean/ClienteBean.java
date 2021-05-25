@@ -61,8 +61,6 @@ public class ClienteBean {
 			cliente.setLocalidade(cepCliete.getLocalidade());
 			cliente.setUf(cepCliete.getUf());
 			cliente.setUnidade(cepCliete.getUnidade());
-			cliente.setIbge(cepCliete.getIbge());
-			cliente.setGia(cepCliete.getGia());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,9 +73,9 @@ public class ClienteBean {
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Status", "Removido!"));
 		return null;
 	}
-	
+
 	public void pesquisar() {
-		
+
 	}
 
 	public Cliente getCliente() {

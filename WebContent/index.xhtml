@@ -14,7 +14,7 @@
 
 	<h:form id="form">
 		<p:messages autoUpdate="true" showDetail="true" />
-		<h:panelGrid columns="4">
+		<p:panelGrid columns="4">
 
 			<f:facet name="header">
 				<p:outputLabel value="CADASTRO" />
@@ -31,10 +31,15 @@
 			<p:inputText value="#{clienteBean.cliente.nomeCompleto}"
 				placeholder="Nome completo" required="true"
 				requiredMessage="Campo nome Vazio!" id="camponome"
-				style="width:250px;">
+				style="width:270px;">
 			</p:inputText>
 
-			<p:outputLabel value="Sexo:" />
+			<p:outputLabel for="cpf" value="CPF:" />
+			<p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}"
+				mask="999.999.999-99" validateMask="true" style="width:150px;"
+				required="true" requiredMessage="Informe seu Cpf" />
+
+			<p:outputLabel value="Sexo:*" />
 			<p:selectOneMenu id="camposexo" value="#{clienteBean.cliente.sexo}"
 				required="true" requiredMessage="Campo sexo não especificado">
 				<f:selectItem itemLabel="-Selecione-" itemValue="nao"
@@ -57,7 +62,7 @@
 			<p:outputLabel value="CEP*:" />
 			<p:inputMask value="#{clienteBean.cliente.cep}" required="true"
 				requiredMessage="Campo CEP Vazio!" id="campocep" mask="99999-999"
-				validateMask="true">
+				validateMask="true" style="width:120px;">
 				<f:ajax event="blur" execute="@this"
 					render="logradouro complemento bairro localidade uf"
 					listener="#{clienteBean.pesquisaEndereco}" />
@@ -83,16 +88,21 @@
 
 			<p:outputLabel value="UF:" />
 			<p:inputText value="#{clienteBean.cliente.uf}" id="uf"
-				disabled="true" />
+				disabled="true" style="width:30px;" />
 
 			<p:outputLabel value="Número:" />
-			<p:inputText value="#{clienteBean.cliente.numeroCasa}"
+			<p:inputNumber value="#{clienteBean.cliente.numeroCasa}"
 				id="numerocasa" />
 
 
-			<p:outputLabel value="Preferencial" />
-			<p:selectBooleanCheckbox value="#{clienteBean.cliente.preferencial}" />
 
+			<p:outputLabel value="Atendimento:*" />
+			<p:selectOneRadio id="atentimento"
+				value="#{clienteBean.cliente.atendimento}" required="true"
+				requiredMessage="Infome atendimento">
+				<f:selectItem itemLabel="Particular" itemValue="Particular" />
+				<f:selectItem itemLabel="Convenio" itemValue="Convenio" />
+			</p:selectOneRadio>
 
 			<h:panelGroup>
 				<p:commandButton value="Salvar" action="#{clienteBean.salvar}"
@@ -101,8 +111,10 @@
 					update="form" />
 			</h:panelGroup>
 
-		</h:panelGrid>
+		</p:panelGrid>
 	</h:form>
+
+	<br></br>
 
 	<h:form>
 		<p:dataTable value="#{clienteBean.lista}" var="client" cellpadding="5"
@@ -112,19 +124,57 @@
 				<p:outputLabel value="Lista de Cadastrados" />
 			</f:facet>
 
-			<p:column headerText="ID" style="width:30px;">
+			<p:column headerText="ID" style="width:20px;">
 				<p:outputLabel value="#{client.id}" />
 			</p:column>
 
-			<p:column headerText="Nome Completo">
+			<p:column headerText="Nome Completo" style="width:270px;">
 				<p:outputLabel value="#{client.nomeCompleto}" />
 			</p:column>
 
-
-			<p:column headerText="Sexo">
-				<p:outputLabel value="#{client.sexo}" />
+			<p:column headerText="Cpf" style="width:125px;">
+				<p:outputLabel value="#{client.cpf}" />
 			</p:column>
 
+			<p:column headerText="Data Nascimento" style="width:100px;">
+				<p:outputLabel value="#{client.dataNascimento}" />
+			</p:column>
+
+			<p:column headerText="Sexo" style="width:80px;">
+				<p:outputLabel value="#{client.sexo}" />
+			</p:column>
+			
+			<p:column headerText="Email" style="width:200px;">
+				<p:outputLabel value="#{client.email}" />
+			</p:column>
+
+			<p:column headerText="Logradouro" style="width:150px;">
+				<p:outputLabel value="#{client.logradouro}" />
+			</p:column>
+			
+			<p:column headerText="Número" style="width:80px;">
+				<p:outputLabel value="#{client.numeroCasa}" />
+			</p:column>
+
+			<p:column headerText="Cep" style="width:100px;">
+				<p:outputLabel value="#{client.cep}" />
+			</p:column>
+
+			<p:column headerText="Bairro" style="width:125px;">
+				<p:outputLabel value="#{client.bairro}" />
+			</p:column>
+
+			<p:column headerText="Localidade" style="width:90px;">
+				<p:outputLabel value="#{client.localidade}" />
+			</p:column>
+
+			<p:column headerText="UF" style="width:30px;">
+				<p:outputLabel value="#{client.uf}" />
+			</p:column>
+
+			<p:column headerText="Atendimento" style="width:100px;">
+				<p:outputLabel value="#{client.atendimento}" />
+			</p:column>
 
 			<p:column headerText="Editar">
 				<h:commandLink id="linkeditar">

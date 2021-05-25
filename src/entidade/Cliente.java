@@ -21,9 +21,10 @@ public class Cliente implements Serializable {
 	private Integer id;
 	private String nomeCompleto;
 	private String sexo;
+	private String cpf;
 	private String telefone;
 	private String email;
-	private Boolean preferencial;
+	private String atendimento;
 	private String cep;
 	private String logradouro;
 	private String complemento;
@@ -31,8 +32,7 @@ public class Cliente implements Serializable {
 	private String localidade;
 	private String uf;
 	private String unidade;
-	private String ibge;
-	private String gia;
+
 	private String numeroCasa;
 
 	@Temporal(TemporalType.DATE)
@@ -97,22 +97,6 @@ public class Cliente implements Serializable {
 		this.unidade = unidade;
 	}
 
-	public String getIbge() {
-		return ibge;
-	}
-
-	public void setIbge(String ibge) {
-		this.ibge = ibge;
-	}
-
-	public String getGia() {
-		return gia;
-	}
-
-	public void setGia(String gia) {
-		this.gia = gia;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -135,14 +119,6 @@ public class Cliente implements Serializable {
 
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
-	}
-
-	public Boolean getPreferencial() {
-		return preferencial;
-	}
-
-	public void setPreferencial(Boolean preferencial) {
-		this.preferencial = preferencial;
 	}
 
 	public String getEmail() {
@@ -177,6 +153,22 @@ public class Cliente implements Serializable {
 		this.nomeCompleto = nomeCompleto;
 	}
 
+	public String getAtendimento() {
+		return atendimento;
+	}
+
+	public void setAtendimento(String atendimento) {
+		this.atendimento = atendimento;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -201,4 +193,5 @@ public class Cliente implements Serializable {
 			return false;
 		return true;
 	}
+
 }
