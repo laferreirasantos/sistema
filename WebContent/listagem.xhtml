@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Listagem</title>
+</h:head>
+<h:body>
+	<h:form id="formlista">
+		<p:messages autoUpdate="true" showDetail="true" />
+		<p:panelGrid columns="1">
+
+			<p:dataTable value="#{clienteBean.lista}" var="client"
+				cellpadding="5" border="2">
+
+				<f:facet name="header">
+					<p:outputLabel value="Lista de Cadastrados" />
+				</f:facet>
+
+				<p:column headerText="ID">
+					<p:outputLabel value="#{client.id}" />
+				</p:column>
+
+				<p:column headerText="Nome Completo">
+					<p:outputLabel value="#{client.nomeCompleto}" />
+				</p:column>
+
+
+				<p:column headerText="Sexo">
+					<p:outputLabel value="#{client.sexo}" />
+				</p:column>
+
+
+				<p:column headerText="Editar">
+					<h:commandLink id="linkeditar">
+						<f:setPropertyActionListener value="#{client}"
+							target="#{clienteBean.cliente}" />
+						<h:graphicImage value="/resources/img/editar.png" />
+						<f:ajax execute="linkeditar" render="formlista" />
+					</h:commandLink>
+				</p:column>
+
+				<p:column headerText="Excluir">
+					<p:commandLink action="#{clienteBean.remover}" id="linkexcluir">
+						<f:setPropertyActionListener value="#{client}"
+							target="#{clienteBean.cliente}" />
+						<p:graphicImage value="/resources/img/remover.png" />
+						<f:ajax execute="linkexcluir" render="formlista" />
+					</p:commandLink>
+				</p:column>
+			</p:dataTable>
+		</p:panelGrid>
+		<h:link outcome="index" value="Voltar" />
+	</h:form>
+
+</h:body>
+
+</html>
