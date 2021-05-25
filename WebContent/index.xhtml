@@ -28,8 +28,7 @@
 			<p:inputText value="#{clienteBean.cliente.email}" />
 
 			<p:outputLabel value="Nome Completo*:" />
-			<p:inputText value="#{clienteBean.cliente.nomeCompleto}"
-				placeholder="Nome completo" required="true"
+			<p:inputText value="#{clienteBean.cliente.nomeCompleto}" required="true"
 				requiredMessage="Campo nome Vazio!" id="camponome"
 				style="width:270px;">
 			</p:inputText>
@@ -37,7 +36,9 @@
 			<p:outputLabel for="cpf" value="CPF:" />
 			<p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}"
 				mask="999.999.999-99" validateMask="true" style="width:150px;"
-				required="true" requiredMessage="Informe seu Cpf" />
+				required="true" requiredMessage="Informe seu Cpf">
+				<f:validator validatorId="cpf"/>
+			</p:inputMask>
 
 			<p:outputLabel value="Sexo:*" />
 			<p:selectOneMenu id="camposexo" value="#{clienteBean.cliente.sexo}"
@@ -71,7 +72,6 @@
 			<p:outputLabel value="Logradouro:" />
 			<p:inputText value="#{clienteBean.cliente.logradouro}"
 				id="logradouro" style="width:300px;" disabled="true" />
-
 
 
 			<p:outputLabel value="Complemento:" />
@@ -117,13 +117,11 @@
 	<br></br>
 
 	<h:form>
-		<p:dataTable value="#{clienteBean.lista}" var="client" cellpadding="5"
-			border="2" id="listacadastro">
-
-			<f:facet name="header">
-				<p:outputLabel value="Lista de Cadastrados" />
-			</f:facet>
-
+		<p:dataTable var="client" value="#{clienteBean.lista}"
+			rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} Cadastros">
+		
 			<p:column headerText="ID" style="width:20px;">
 				<p:outputLabel value="#{client.id}" />
 			</p:column>
@@ -143,7 +141,7 @@
 			<p:column headerText="Sexo" style="width:80px;">
 				<p:outputLabel value="#{client.sexo}" />
 			</p:column>
-			
+
 			<p:column headerText="Email" style="width:200px;">
 				<p:outputLabel value="#{client.email}" />
 			</p:column>
@@ -151,7 +149,7 @@
 			<p:column headerText="Logradouro" style="width:150px;">
 				<p:outputLabel value="#{client.logradouro}" />
 			</p:column>
-			
+
 			<p:column headerText="Número" style="width:80px;">
 				<p:outputLabel value="#{client.numeroCasa}" />
 			</p:column>
