@@ -20,7 +20,7 @@ public class ClienteDao {
 
 	public static List<Cliente> listar() {
 		EntityManager em = JpaUtil.criarEntityManager();
-		Query query = em.createQuery("select c from Cliente c");
+		Query query = em.createQuery("select c from Cliente c order by c.id desc");
 		List<Cliente> lista = query.getResultList();
 		em.close();
 		return lista;

@@ -50,7 +50,6 @@ public class ClienteBean {
 			while ((cep = reader.readLine()) != null) {
 				json.append(cep);
 			}
-			System.out.println(json.toString());
 
 			Cliente cepCliete = new Gson().fromJson(json.toString(), Cliente.class);
 
@@ -62,15 +61,25 @@ public class ClienteBean {
 			cliente.setUf(cepCliete.getUf());
 			cliente.setUnidade(cepCliete.getUnidade());
 
+			if (cliente.getLogradouro() == null) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Falha", "CEP não encontrado"));
+
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Status", "CEP encontrado"));
+
+			}
+
 		} catch (Exception e) {
-			e.printStackTrace();
+
 		}
 	}
 
 	public String remover() {
 		ClienteDao.remover(cliente);
 		FacesContext.getCurrentInstance().addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_INFO, "Status", "Removido!"));
+				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Status", "Removido!"));
 		return null;
 	}
 
