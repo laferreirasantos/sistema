@@ -17,7 +17,7 @@
 		<p:panelGrid columns="4">
 
 			<f:facet name="header">
-				<p:outputLabel value="CADASTRO" />
+				<p:outputLabel value="Cadastro De Pacientes" />
 			</f:facet>
 
 			<p:outputLabel value="ID:" />
@@ -28,8 +28,8 @@
 			<p:inputText value="#{clienteBean.cliente.email}" />
 
 			<p:outputLabel value="Nome Completo*:" />
-			<p:inputText value="#{clienteBean.cliente.nomeCompleto}" required="true"
-				requiredMessage="Campo nome Vazio!" id="camponome"
+			<p:inputText value="#{clienteBean.cliente.nomeCompleto}"
+				required="true" requiredMessage="Campo nome Vazio!" id="camponome"
 				style="width:270px;">
 			</p:inputText>
 
@@ -37,7 +37,7 @@
 			<p:inputMask id="cpf" value="#{clienteBean.cliente.cpf}"
 				mask="999.999.999-99" validateMask="true" style="width:150px;"
 				required="true" requiredMessage="Informe seu Cpf">
-				<f:validator validatorId="cpf"/>
+				<f:validator validatorId="cpf" />
 			</p:inputMask>
 
 			<p:outputLabel value="Sexo:*" />
@@ -94,8 +94,6 @@
 			<p:inputNumber value="#{clienteBean.cliente.numeroCasa}"
 				id="numerocasa" />
 
-
-
 			<p:outputLabel value="Atendimento:*" />
 			<p:selectOneRadio id="atentimento"
 				value="#{clienteBean.cliente.atendimento}" required="true"
@@ -117,11 +115,23 @@
 	<br></br>
 
 	<h:form>
-		<p:dataTable var="client" value="#{clienteBean.lista}"
-			rows="10" paginator="true"
+		<p:panel header="Busca De Pacientes" style="width:400px;">
+			<h:panelGrid columns="3">
+				<p:outputLabel value="Nome:" />
+				<p:inputText value="#{clienteBean.pesquisa}" />
+				<p:commandButton value="Buscar" actionListener="#{clienteBean.pesquisar}" update="formtabela" />
+
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+	<h:form id="formtabela">
+		<p:dataTable var="client" value="#{clienteBean.lista}" rows="10"
+			paginator="true"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			currentPageReportTemplate="{startRecord}-{endRecord} de {totalRecords} Cadastros">
-		
+
 			<p:column headerText="ID" style="width:20px;">
 				<p:outputLabel value="#{client.id}" />
 			</p:column>
@@ -130,7 +140,7 @@
 				<p:outputLabel value="#{client.nomeCompleto}" />
 			</p:column>
 
-			<p:column headerText="Cpf" style="width:125px;">
+			<p:column headerText="Cpf" style="width:135px;">
 				<p:outputLabel value="#{client.cpf}" />
 			</p:column>
 
@@ -170,7 +180,7 @@
 				<p:outputLabel value="#{client.uf}" />
 			</p:column>
 
-			<p:column headerText="Atendimento" style="width:100px;">
+			<p:column headerText="Atendimento" style="width:110px;">
 				<p:outputLabel value="#{client.atendimento}" />
 			</p:column>
 

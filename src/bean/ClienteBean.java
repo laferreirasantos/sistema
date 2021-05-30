@@ -84,7 +84,7 @@ public class ClienteBean {
 	}
 
 	public void pesquisar() {
-
+		lista = ClienteDao.pesquisar(pesquisa);
 	}
 
 	public Cliente getCliente() {

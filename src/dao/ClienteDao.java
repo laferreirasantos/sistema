@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import entidade.Cliente;
+
 import util.JpaUtil;
 
 public class ClienteDao {
@@ -43,6 +44,13 @@ public class ClienteDao {
 		em.remove(cliente);
 		em.getTransaction().commit();
 		em.close();
+	}
+
+	public static  List<Cliente> pesquisar(String pesquisa) {
+		EntityManager em = JpaUtil.criarEntityManager();
+		Query query = em.createQuery("from Cliente where nomecompleto like '%" + pesquisa + "%' ");
+		
+		return query.getResultList();
 	}
 
 }
