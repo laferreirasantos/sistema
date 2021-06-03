@@ -22,6 +22,7 @@ import entidade.Cliente;
 @ManagedBean(name = "clienteBean")
 public class ClienteBean {
 
+	
 	private Cliente cliente = new Cliente();
 	private List<Cliente> lista;
 	private String pesquisa;
@@ -103,6 +104,7 @@ public class ClienteBean {
 		return lista;
 	}
 
+	
 	public void setLista(List<Cliente> lista) {
 		this.lista = lista;
 	}
